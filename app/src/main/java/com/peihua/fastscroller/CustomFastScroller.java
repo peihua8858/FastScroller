@@ -324,11 +324,13 @@ class CustomFastScroller extends RecyclerView.ItemDecoration implements Recycler
     private void drawHorizontalScrollbar(Canvas canvas) {
         int viewHeight = mRecyclerViewHeight;
 
-        int top = viewHeight - mHorizontalThumbHeight;
+        int top = (int) (viewHeight - mHorizontalThumbHeight * mScaleValue);
         int left = mHorizontalThumbCenterX - mHorizontalThumbWidth / 2;
-        mHorizontalThumbDrawable.setBounds(0, 0, mHorizontalThumbWidth, mHorizontalThumbHeight);
+        mHorizontalThumbDrawable.setCornerRadius(mRadius * mScaleValue);
+        mHorizontalThumbDrawable.setBounds(0, 0, mHorizontalThumbWidth, (int) (mHorizontalThumbHeight* mScaleValue));
+        mHorizontalTrackDrawable.setCornerRadius(mRadius * mScaleValue);
         mHorizontalTrackDrawable
-                .setBounds(0, 0, mRecyclerViewWidth, mHorizontalTrackHeight);
+                .setBounds(0, 0, mRecyclerViewWidth, (int) (mHorizontalTrackHeight* mScaleValue));
 
         canvas.translate(0, top);
         mHorizontalTrackDrawable.draw(canvas);
@@ -452,11 +454,13 @@ class CustomFastScroller extends RecyclerView.ItemDecoration implements Recycler
 
     private void hideScaleAnimation() {
         mScaleAnimator.setFloatValues((Float) mScaleAnimator.getAnimatedValue(), 1);
+        mScaleAnimator.setDuration(SHOW_DURATION_MS);
         mScaleAnimator.start();
     }
 
     private void showScaleAnimation() {
         mScaleAnimator.setFloatValues(1, 3);
+        mScaleAnimator.setDuration(SHOW_DURATION_MS);
         mScaleAnimator.start();
     }
 
@@ -477,6 +481,7 @@ class CustomFastScroller extends RecyclerView.ItemDecoration implements Recycler
             mRecyclerView.scrollBy(0, scrollingBy);
         }
         mVerticalDragY = y;
+        requestRedraw();
     }
 
     private void horizontalScrollTo(float x) {
