@@ -16,8 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { setUrl("https://developer.huawei.com/repo/")  }
     }
 }
 
 rootProject.name = "FastScroller"
 include(":app")
+include(":scrollbarview")

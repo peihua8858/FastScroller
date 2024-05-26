@@ -6,31 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.peihua.fastscroller.databinding.ActivityMainBinding
+import com.peihua.scrollbarview.widget.NewScrollbarHelper
+import com.peihua.scrollbarview.widget.OldScrollbarHelper
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        val binding = ActivityMainBinding.bind(findViewById(R.id.recycle_view))
+        val binding = ActivityMainBinding.bind(findViewById(R.id.cl_root))
         binding.apply {
-            CustomFastScroller.initFastScroller(recycleView)
-            recycleView.layoutManager = LinearLayoutManager(this@MainActivity)
+//            CustomFastScroller.initFastScroller(recycleView)
             val mAdapter = MainAdapter(this@MainActivity)
             val data = mutableListOf<String>()
             for (index in 0 until 50) {
                 data.add("item>>>$index")
             }
             mAdapter.mData.addAll(data)
-            recycleView.adapter = mAdapter
+            recyclerView.setAdapter(mAdapter)
+            recyclerView.setItemAnimator(null)
+            recyclerView.setLayoutManager(LinearLayoutManager(this@MainActivity))
+            recyclerView.setOverScrollMode(2)
+            OldScrollbarHelper.bindRecyclerView(recyclerView,scrollbarView)
         }
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 //            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

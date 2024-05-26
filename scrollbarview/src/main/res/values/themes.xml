@@ -1,14 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.FastScroller" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
-
-    <style name="Theme.FastScroller" parent="Base.Theme.FastScroller" />
     <style name="ScrollbarDrawableStyle" parent="Widget.AppCompat.ActionBar">
         <item name="scrollbarActivatedWidth">8dp</item>
-        <item name="scrollbarColor">@color/hwscrollbarview_selector_color_thumb</item>
+        <item name="scrollbarColor">@color/scrollbarview_selector_color_thumb</item>
         <item name="scrollbarEndMargin">4dp</item>
 <!--        <item name="scrollbarInterpolator">@interpolator/cubic_bezier_interpolator_type_33_33</item>-->
         <item name="scrollbarNormalWidth">4dp</item>
@@ -33,5 +26,15 @@
         <item name="scrollbarViewStyle">@style/WidgetScrollbarView</item>
     </style>
 
-    <style name="Widget_Emui_ScrollbarView"></style>
+
+    <style name="ThemeNewScrollbarView" parent="">
+        <item name="scrollbarViewStyle">@style/WidgetNewScrollbarView</item>
+    </style>
+    <style name="WidgetNewScrollbarView" parent="">
+        <item name="scrollThumb">@drawable/scrollbarview_selector_thumb</item>
+        <item name="scrollThumbTint">@color/scrollbarview_thumb</item>
+        <item name="minThumbWidth">18dp</item>
+        <item name="minThumbHeight">@dimen/scrollbarview_minthumbheight</item>
+        <item name="android:minWidth">@dimen/scrollbarview_minwidth</item>
+    </style>
 </resources>

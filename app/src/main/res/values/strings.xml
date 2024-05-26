@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FastScroller</string>
+<!--    <string name="cubicBezierInterpolator">com.peihua.fastscroller.uikit.anim.CubicBezierInterpolator</string>-->
 </resources>
