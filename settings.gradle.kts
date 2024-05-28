@@ -23,3 +23,5 @@ dependencyResolutionManagement {
 rootProject.name = "FastScroller"
 include(":app")
 include(":scrollbarview")
+include(":scrollbarview2")
+include(":oldSrollbarView")

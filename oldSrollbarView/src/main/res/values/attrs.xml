@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <attr format="reference" name="scrollThumb"/>
+    <attr format="reference" name="scrollTrack"/>
+    <attr format="color" name="scrollThumbTint"/>
+    <attr format="color" name="scrollTrackTint"/>
+    <attr format="dimension" name="minThumbHeight"/>
+    <attr format="dimension" name="minThumbWidth"/>
+    <declare-styleable name="ScrollbarView">
+        <attr name="scrollThumb"/>
+        <attr name="scrollTrack"/>
+        <attr name="scrollThumbTint"/>
+        <attr name="scrollTrackTint"/>
+        <attr name="minThumbHeight"/>
+        <attr name="minThumbWidth"/>
+        <attr name="bandScrollView" format="reference" />
+        <attr name="minThumbLength" format="dimension" />
+        <attr name="overScrollMinThumbLength" format="dimension" />
+        <attr name="thumbWidth" format="dimension" />
+        <attr name="trackWidth" format="dimension" />
+        <attr name="thumbTouchHotWidth" format="dimension" />
+        <attr name="thumbType" format="integer" />
+        <attr name="startAngle" format="float" />
+        <attr name="sweepAngle" format="float" />
+        <attr name="vibrateDelayTime" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="ScrollbarDrawable">
+        <attr name="scrollbarNormalWidth" format="dimension" />
+        <attr name="scrollbarActivatedWidth" format="dimension" />
+        <attr name="scrollbarEndMargin" format="dimension" />
+        <attr name="scrollbarColor" format="color" />
+        <attr name="scrollbarInterpolator" format="reference" />
+        <attr name="scrollbarToActivatedDuration" format="integer" />
+        <attr name="scrollbarToUnactivatedDuration" format="integer" />
+    </declare-styleable>
+    <attr name="scrollbarViewStyle" />
+    <attr name="fromXDelta" format="float|fraction" />
+    <attr name="fromYDelta" format="float|fraction" />
+    <attr name="hasAnimation" format="boolean" />
+    <attr name="toXDelta" format="float|fraction" />
+    <attr name="toYDelta" format="float|fraction" />
+    <attr name="bandScroll" format="reference" />
+    <declare-styleable name="TranslateAnimation">
+        <attr name="fromXDelta" />
+        <attr name="fromYDelta" />
+        <attr name="hasAnimation" />
+        <attr name="toXDelta" />
+        <attr name="toYDelta" />
+    </declare-styleable>
+</resources>

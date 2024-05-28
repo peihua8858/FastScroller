@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="ScrollbarDrawableStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="scrollbarActivatedWidth">8dp</item>
+        <item name="scrollbarColor">@color/scrollbarview_selector_color_thumb</item>
+        <item name="scrollbarEndMargin">4dp</item>
+<!--        <item name="scrollbarInterpolator">@interpolator/cubic_bezier_interpolator_type_33_33</item>-->
+        <item name="scrollbarNormalWidth">4dp</item>
+        <item name="scrollbarToActivatedDuration">150</item>
+        <item name="scrollbarToUnactivatedDuration">250</item>
+    </style>
+
+    <style name="WidgetScrollbarView" parent="@style/ScrollbarDrawableStyle">
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:minWidth">@dimen/scrollbarview_min_width</item>
+        <item name="minThumbLength">@dimen/scrollbarview_min_thumb_length</item>
+        <item name="minThumbWidth">16dp</item>
+        <item name="overScrollMinThumbLength">@dimen/scrollbarview_overscroll_min_thumb_length</item>
+        <item name="scrollThumb">@null</item>
+        <item name="scrollThumbTint">@color/scrollbarview_selector_color_thumb</item>
+        <item name="thumbTouchHotWidth">@dimen/scrollbarview_min_width</item>
+        <item name="thumbWidth">@dimen/scrollbarview_thumb_width</item>
+        <item name="trackWidth">@dimen/scrollbarview_thumb_width</item>
+        <item name="vibrateDelayTime">50</item>
+    </style>
+    <style name="ThemeScrollbarView">
+        <item name="scrollbarViewStyle">@style/WidgetScrollbarView</item>
+    </style>
+
+
+    <style name="ThemeNewScrollbarView" parent="">
+        <item name="scrollbarViewStyle">@style/WidgetNewScrollbarView</item>
+    </style>
+    <style name="WidgetNewScrollbarView" parent="">
+        <item name="scrollThumb">@drawable/scrollbarview_selector_thumb</item>
+        <item name="scrollThumbTint">@color/scrollbarview_thumb</item>
+        <item name="minThumbWidth">12dp</item>
+        <item name="minThumbHeight">@dimen/scrollbarview_minthumbheight</item>
+        <item name="android:minWidth">@dimen/scrollbarview_minwidth</item>
+    </style>
+</resources>
