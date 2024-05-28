@@ -59,9 +59,9 @@ public class ScrollBindBaseImpl implements IScrollBind {
     }
 
     @Override
-    public void onScrollableViewTouchEvent(View var1, NewScrollbarView var2, MotionEvent var3) {
+    public void onScrollableViewTouchEvent(View var1, ScrollbarView var2, MotionEvent var3) {
         if (var1 != null && var2 != null && var3 != null) {
-            var2.onScrollableViewTouchEvent(var1, var3);
+            var2.scrollableViewTouchEvent(var1, var3);
         }
     }
 }
