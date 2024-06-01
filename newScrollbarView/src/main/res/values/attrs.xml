@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <attr format="reference" name="scrollThumb"/>
+    <attr format="reference" name="scrollTrack"/>
+    <attr format="color" name="scrollThumbTint"/>
+    <attr format="color" name="scrollTrackTint"/>
+    <attr format="dimension" name="minThumbHeight"/>
+    <attr format="dimension" name="minThumbWidth"/>
+
+    <attr name="scrollbarViewStyle" />
+    <declare-styleable name="ScrollbarView">
+        <attr name="scrollThumb"/>
+        <attr name="scrollTrack"/>
+        <attr name="scrollThumbTint"/>
+        <attr name="scrollTrackTint"/>
+        <attr name="minThumbHeight"/>
+        <attr name="minThumbWidth"/>
+        <attr name="bandScrollView" format="reference" />
+    </declare-styleable>
+</resources>

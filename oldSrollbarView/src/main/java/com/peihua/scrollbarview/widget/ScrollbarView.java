@@ -18,6 +18,7 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 
+import androidx.annotation.IdRes;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 
@@ -84,6 +85,7 @@ public class ScrollbarView extends View {
     private int mLastX;
     private int mLastY;
     private int mScaledTouchSlop;
+    @IdRes
     private int mBandScroll;
     static {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="ThemeScrollbarView" parent="">
+        <item name="scrollbarViewStyle">@style/WidgetScrollbarView</item>
+    </style>
+    <style name="WidgetScrollbarView" parent="">
+        <item name="scrollThumb">@drawable/scrollbarview_selector_thumb</item>
+        <item name="scrollThumbTint">@color/scrollbarview_thumb</item>
+        <item name="minThumbWidth">12dp</item>
+        <item name="minThumbHeight">@dimen/scrollbarview_minthumbheight</item>
+        <item name="android:minWidth">@dimen/scrollbarview_minwidth</item>
+    </style>
+</resources>

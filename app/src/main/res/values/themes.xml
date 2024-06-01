@@ -6,32 +6,29 @@
     </style>
 
     <style name="Theme.FastScroller" parent="Base.Theme.FastScroller" />
-    <style name="ScrollbarDrawableStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="scrollbarActivatedWidth">8dp</item>
-        <item name="scrollbarColor">@color/hwscrollbarview_selector_color_thumb</item>
-        <item name="scrollbarEndMargin">4dp</item>
-<!--        <item name="scrollbarInterpolator">@interpolator/cubic_bezier_interpolator_type_33_33</item>-->
-        <item name="scrollbarNormalWidth">4dp</item>
-        <item name="scrollbarToActivatedDuration">150</item>
-        <item name="scrollbarToUnactivatedDuration">250</item>
-    </style>
 
-    <style name="WidgetScrollbarView" parent="@style/ScrollbarDrawableStyle">
-        <item name="android:paddingBottom">24dp</item>
-        <item name="android:minWidth">@dimen/scrollbarview_min_width</item>
-        <item name="minThumbLength">@dimen/scrollbarview_min_thumb_length</item>
-        <item name="minThumbWidth">16dp</item>
-        <item name="overScrollMinThumbLength">@dimen/scrollbarview_overscroll_min_thumb_length</item>
-        <item name="scrollThumb">@null</item>
-        <item name="scrollThumbTint">@color/scrollbarview_selector_color_thumb</item>
-        <item name="thumbTouchHotWidth">@dimen/scrollbarview_min_width</item>
-        <item name="thumbWidth">@dimen/scrollbarview_thumb_width</item>
-        <item name="trackWidth">@dimen/scrollbarview_thumb_width</item>
-        <item name="vibrateDelayTime">50</item>
-    </style>
-    <style name="ThemeScrollbarView">
-        <item name="scrollbarViewStyle">@style/WidgetScrollbarView</item>
-    </style>
+<!--    <style name="WidgetScrollbarView" parent="">-->
+<!--        <item name="scrollbarActivatedWidth">16dp</item>-->
+<!--        <item name="scrollbarColor">@color/hwscrollbarview_selector_color_thumb</item>-->
+<!--        <item name="scrollbarEndMargin">4dp</item>-->
+<!--        &lt;!&ndash;        <item name="scrollbarInterpolator">@interpolator/cubic_bezier_interpolator_type_33_33</item>&ndash;&gt;-->
+<!--        <item name="scrollbarNormalWidth">8dp</item>-->
+<!--        <item name="scrollbarToActivatedDuration">150</item>-->
+<!--        <item name="scrollbarToUnactivatedDuration">250</item>-->
+<!--        <item name="android:paddingBottom">24dp</item>-->
+<!--        <item name="android:minWidth">@dimen/scrollbarview_min_width</item>-->
+<!--        <item name="minThumbLength">@dimen/scrollbarview_min_thumb_length</item>-->
+<!--        <item name="minThumbWidth">32dp</item>-->
+<!--        <item name="overScrollMinThumbLength">@dimen/scrollbarview_overscroll_min_thumb_length</item>-->
+<!--        <item name="scrollThumb">@null</item>-->
+<!--        <item name="scrollThumbTint">@color/scrollbarview_selector_color_thumb</item>-->
+<!--        <item name="thumbTouchHotWidth">@dimen/scrollbarview_min_width</item>-->
+<!--        <item name="thumbWidth">@dimen/scrollbarview_thumb_width</item>-->
+<!--        <item name="trackWidth">@dimen/scrollbarview_thumb_width</item>-->
+<!--        <item name="vibrateDelayTime">50</item>-->
+<!--    </style>-->
+<!--    <style name="ThemeScrollbarView">-->
+<!--        <item name="scrollbarViewStyle">@style/WidgetScrollbarView</item>-->
+<!--    </style>-->
 
-    <style name="Widget_Emui_ScrollbarView"></style>
 </resources>
