@@ -44,7 +44,7 @@ public class ScrollbarView extends View {
     private boolean isThumbShow;
     private boolean mCanScroll;
     private boolean isOverScrolling;
-    private IOverScrollProxy mOverScrollProxy;
+    private IScrollProxy mOverScrollProxy;
     private boolean isOverScroll;
     private int mOverScrollMinThumbLength;
     private int mThumbHeight;
@@ -268,12 +268,12 @@ public class ScrollbarView extends View {
         viewTreeObserver.addOnGlobalLayoutListener(this.onGlobalLayoutListener);
     }
 
-    private void scheduleFadeOutAnimation(int delay) {
+    private void scheduleFadeOutAnimation(int delayMillis) {
         if (this.isThumbShow) {
             this.mUpdateRunnable.mScheduledTime = AnimationUtils.currentAnimationTimeMillis() + this.mFadeTime;
             this.mUpdateRunnable.mFlag = 1;
             removeCallbacks(this.mUpdateRunnable);
-            postDelayed(this.mUpdateRunnable, delay);
+            postDelayed(this.mUpdateRunnable, delayMillis);
         }
     }
 
@@ -573,9 +573,9 @@ public class ScrollbarView extends View {
             this.mCanScroll = canScroll();
         }
         if (this.mCanScroll) {
-            IOverScrollProxy proxy = this.mOverScrollProxy;
+            IScrollProxy proxy = this.mOverScrollProxy;
             if (proxy != null) {
-                if (proxy.isOverScrolling()) {
+                if (proxy.isScrolling()) {
                     if (!this.isOverScroll) {
                         this.isOverScroll = true;
                         this.mThumbHeight = this.mThumbRect.height();
@@ -845,7 +845,7 @@ public class ScrollbarView extends View {
         this.mFastScrollable = fastScrollable;
     }
 
-    public void setOverScrollProxy(IOverScrollProxy proxy) {
+    public void setOverScrollProxy(IScrollProxy proxy) {
         this.mOverScrollProxy = proxy;
     }
 
