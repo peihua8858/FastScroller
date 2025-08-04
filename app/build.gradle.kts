@@ -42,7 +42,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
-    implementation(project(":scrollbarview"))
+    implementation(project(":oldSrollbarView"))
+//    implementation(project(":geniescrollbarview"))
     implementation("com.huawei.ui.uikit:hwscrollbarview-car:1.0.0.500")
 
 }

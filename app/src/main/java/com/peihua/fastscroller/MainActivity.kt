@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.peihua.fastscroller.databinding.ActivityMainBinding
-import com.peihua.scrollbarview.widget.NewScrollbarHelper
-import com.peihua.scrollbarview.widget.OldScrollbarHelper
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.setItemAnimator(null)
             recyclerView.setLayoutManager(LinearLayoutManager(this@MainActivity))
             recyclerView.setOverScrollMode(2)
-            OldScrollbarHelper.bindRecyclerView(recyclerView,scrollbarView)
+//            OldScrollbarHelper.bindRecyclerView(recyclerView,scrollbarView)
         }
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 //            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

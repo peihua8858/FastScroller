@@ -23,12 +23,12 @@
             android:splitMotionEvents="false" />
     </FrameLayout>
 
-    <com.peihua.scrollbarview.widget.ScrollbarView
+    <com.alibaba.scrollbarview.widget.GenieScrollbarView
         android:id="@+id/scrollbar_view"
         style="@style/ThemeScrollbarView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:bandScroll="@id/recycler_view"
+        app:bandScrollView="@id/recycler_view"
         app:layout_constraintBottom_toBottomOf="@id/frame_layout"
         app:layout_constraintEnd_toEndOf="@id/frame_layout"
         app:layout_constraintHorizontal_bias="1"

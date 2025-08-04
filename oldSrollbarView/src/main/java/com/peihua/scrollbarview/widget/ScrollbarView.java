@@ -156,19 +156,19 @@ public class ScrollbarView extends View {
             mComputeVerticalScrollRange = View.class.getDeclaredMethod("computeVerticalScrollRange", new Class[0]);
         } catch (NoSuchMethodException unused) {
             mComputeVerticalScrollRange = null;
-            Log.w("HwScrollbarView", "NoSuchMethodException computeVerticalScrollRange");
+            Log.w("ScrollbarView", "NoSuchMethodException computeVerticalScrollRange");
         }
         try {
             mComputeVerticalScrollExtent = View.class.getDeclaredMethod("computeVerticalScrollExtent", new Class[0]);
         } catch (NoSuchMethodException unused2) {
             mComputeVerticalScrollExtent = null;
-            Log.w("HwScrollbarView", "NoSuchMethodException computeVerticalScrollExtent");
+            Log.w("ScrollbarView", "NoSuchMethodException computeVerticalScrollExtent");
         }
         try {
             mComputeVerticalScrollOffset = View.class.getDeclaredMethod("computeVerticalScrollOffset", new Class[0]);
         } catch (NoSuchMethodException unused3) {
             mComputeVerticalScrollOffset = null;
-            Log.w("HwScrollbarView", "NoSuchMethodException computeVerticalScrollOffset");
+            Log.w("ScrollbarView", "NoSuchMethodException computeVerticalScrollOffset");
         }
     }
 
@@ -619,7 +619,7 @@ public class ScrollbarView extends View {
         setupScrollableViewObserver();
         scheduleFadeOutAnimation(1750);
         if (this.mBandScroll == 0) {
-            Log.d("CustomScrollbarView", "onAttachedToWindow mScrollViewId is null");
+            Log.d("ScrollbarView", "onAttachedToWindow mScrollViewId is null");
             return;
         }
         ViewParent parent = getParent();
@@ -628,7 +628,7 @@ public class ScrollbarView extends View {
         }
         View view = ((View) parent).findViewById(this.mBandScroll);
         if (view == null) {
-            Log.d("CustomScrollbarView", "bindScrollView is null");
+            Log.d("ScrollbarView", "bindScrollView is null");
         }
         ScrollbarHelper.bindScrollableView(view,this);
     }
@@ -642,6 +642,7 @@ public class ScrollbarView extends View {
     protected void onDetachedFromWindow() {
         ViewTreeObserver viewTreeObserver;
         super.onDetachedFromWindow();
+        removeCallbacks(mUpdateRunnable);
         WeakReference<ViewTreeObserver> weakReference = this.viewTreeObserverWeakReference;
         if (weakReference == null || this.onGlobalLayoutListener == null || (viewTreeObserver = weakReference.get()) == null || !viewTreeObserver.isAlive()) {
             return;
@@ -888,5 +889,9 @@ public class ScrollbarView extends View {
     @Override
     protected boolean verifyDrawable(Drawable drawable) {
         return drawable == this.thumbDrawable || drawable == this.mTrackDrawable || super.verifyDrawable(drawable);
+    }
+
+    public void stopScroll() {
+        removeCallbacks(mUpdateRunnable);
     }
 }
