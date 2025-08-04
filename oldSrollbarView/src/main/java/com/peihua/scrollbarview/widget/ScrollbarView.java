@@ -17,10 +17,16 @@ import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
+import android.widget.ScrollView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.peihua.scrollbarview.R;
 import com.peihua.scrollbarview.utils.WidgetCompat;
@@ -30,8 +36,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-public class ScrollbarView extends View {
-    private static final IScrollBind mScrollBind;
+public class ScrollbarView extends View implements IScrollBind {
     private static Method mComputeVerticalScrollRange;
     private static Method mComputeVerticalScrollExtent;
     private static Method mComputeVerticalScrollOffset;
@@ -87,13 +92,6 @@ public class ScrollbarView extends View {
     private int mScaledTouchSlop;
     @IdRes
     private int mBandScroll;
-    static {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mScrollBind = new ScrollBindApi23Impl();
-        } else {
-            mScrollBind = new ScrollBindBaseImpl();
-        }
-    }
     public interface OnFastScrollListener {
         void onScroll(int scrollX, int scrollY, float scrollProgress);
     }
@@ -311,9 +309,6 @@ public class ScrollbarView extends View {
         scheduleFadeOutAnimation(1750);
     }
 
-    public static IScrollBind getScrollBindImpl() {
-        return mScrollBind;
-    }
 
     private float getScrollProgress() {
         return (this.scrollBarLeft * 1.0f) / (this.mContentHeight - this.scrollBarTop);
@@ -625,14 +620,15 @@ public class ScrollbarView extends View {
             return;
         }
         ViewParent parent = getParent();
-        if (parent == null || !(parent instanceof View)) {
+        if (!(parent instanceof View)) {
             return;
         }
         View view = ((View) parent).findViewById(this.mBandScroll);
         if (view == null) {
             Log.d("ScrollbarView", "bindScrollView is null");
+            return;
         }
-        ScrollbarHelper.bindScrollableView(view,this);
+        bindScrollableView(view);
     }
 
     @Override
@@ -834,6 +830,8 @@ public class ScrollbarView extends View {
                 invalidate();
                 scheduleFadeOutAnimation(1750);
                 break;
+            default:
+                break;
         }
         return this.mState != 0;
     }
@@ -895,5 +893,108 @@ public class ScrollbarView extends View {
 
     public void stopScroll() {
         removeCallbacks(mUpdateRunnable);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void realBindView(View view, boolean useTouch) {
+        if (view == null) {
+            return;
+        }
+        bindScrollableView(view, useTouch);
+        view.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> onScroll());
+    }
+
+    @Override
+    public void onBindView(AbsListView absListView, boolean useTouch) {
+        if (absListView == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            realBindView(absListView, useTouch);
+        } else {
+            bindScrollableView(absListView, useTouch);
+            absListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                }
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    ScrollbarView.this.onScroll();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBindView(RecyclerView recyclerView, boolean useTouch) {
+        if (recyclerView == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            realBindView(recyclerView, useTouch);
+        } else {
+            bindScrollableView(recyclerView, useTouch);
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    onScroll();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBindView(ScrollView scrollView, boolean useTouch) {
+        if (scrollView == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            realBindView(scrollView, useTouch);
+        } else {
+            Log.e("GenieScrollbarView", "use androidx.core.widget.NestedScrollView");
+        }
+    }
+
+    @Override
+    public void onBindView(NestedScrollView scrollView, boolean useTouch) {
+        if (scrollView == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            realBindView(scrollView, useTouch);
+        } else {
+            bindScrollableView(scrollView, useTouch);
+            scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> onScroll());
+        }
+    }
+
+
+    @Override
+    public void onScrollableViewTouchEvent(View view, MotionEvent motionEvent) {
+        if (view == null || motionEvent == null) {
+            return;
+        }
+        scrollableViewTouchEvent(view, motionEvent);
+    }
+
+
+    public void bindScrollableView(View view) {
+        if (view == null) {
+            Log.d("CustomScrollbarView", "bindScrollView is null");
+        }
+        if (view instanceof AbsListView) {
+            ScrollbarHelper.bindListView((AbsListView) view, this);
+        } else if (view instanceof RecyclerView) {
+            ScrollbarHelper.bindRecyclerView((RecyclerView) view, this);
+        } else if (view instanceof ScrollView) {
+            ScrollbarHelper.bindScrollView((ScrollView) view, this);
+        } else if (view instanceof NestedScrollView) {
+            ScrollbarHelper.bindNestedScrollView((NestedScrollView) view, this);
+        } else {
+            Log.d("CustomScrollbarView", "bind view warning");
+        }
     }
 }

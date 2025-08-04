@@ -140,7 +140,7 @@ public class ScrollbarHelper {
         if (!checkView(absListView, scrollbarView)) {
             return false;
         }
-        ScrollbarView.getScrollBindImpl().onBindView(absListView, scrollbarView, z);
+        scrollbarView.onBindView(absListView, z);
         scrollbarView.setOnFastScrollListener((scrollX, scrollY, scrollProgress) -> onScroll(absListView, scrollX, scrollY, scrollProgress));
         scrollbarView.setOverScrollProxy(new IScrollProxy() {
             @Override
@@ -164,7 +164,7 @@ public class ScrollbarHelper {
         if (!checkView(recyclerView, scrollbarView)) {
             return false;
         }
-        ScrollbarView.getScrollBindImpl().onBindView(recyclerView, scrollbarView, z);
+        scrollbarView.onBindView(recyclerView, z);
         scrollbarView.setOnFastScrollListener((scrollX, scrollY, scrollProgress) -> {
             int measuredHeight = ScrollbarHelper.getMeasuredHeight(recyclerView);
             int abs = Math.abs(scrollY);
@@ -196,7 +196,7 @@ public class ScrollbarHelper {
         if (!checkView(scrollView, scrollbarView)) {
             return false;
         }
-        ScrollbarView.getScrollBindImpl().onBindView(scrollView, scrollbarView, z);
+        scrollbarView.onBindView(scrollView, z);
         scrollbarView.setOnFastScrollListener((scrollX, scrollY, scrollProgress) -> scrollView.smoothScrollBy(scrollX, scrollY));
         scrollbarView.setOverScrollProxy(new ScrollViewOverScrollProxy(scrollView));
         return true;
@@ -210,7 +210,7 @@ public class ScrollbarHelper {
         if (!checkView(scrollView, scrollbarView)) {
             return false;
         } else {
-            ScrollbarView.getScrollBindImpl().onBindView(scrollView, scrollbarView, var2);
+            scrollbarView.onBindView(scrollView,  var2);
             scrollbarView.setOnFastScrollListener((scrollX, scrollY, scrollProgress) -> scrollView.smoothScrollBy(scrollX, scrollY));
             scrollbarView.setOverScrollProxy(new ScrollViewOverScrollProxy(scrollView));
             return true;
@@ -240,10 +240,9 @@ public class ScrollbarHelper {
     }
 
     public static void onScrollableViewTouchEvent(View view, ScrollbarView scrollbarView, MotionEvent motionEvent) {
-        Objects.requireNonNull((ScrollBindBaseImpl) ScrollbarView.getScrollBindImpl());
         if (view == null || scrollbarView == null || motionEvent == null) {
             return;
         }
-        scrollbarView.scrollableViewTouchEvent(view, motionEvent);
+        scrollbarView.onScrollableViewTouchEvent(view, motionEvent);
     }
 }
