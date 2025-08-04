@@ -1,5 +1,6 @@
 package com.peihua.scrollbarview.widget;
 
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
@@ -47,6 +48,13 @@ public class ScrollBindBaseImpl implements IScrollBind {
 
     @Override
     public void onBindView(ScrollView scrollView, ScrollbarView scrollbarView, boolean setOnTouchListener) {
+        if (scrollView == null || scrollbarView == null) {
+            return;
+        }
+        scrollbarView.bindScrollableView(scrollView, setOnTouchListener);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> scrollbarView.onScroll());
+        }
     }
 
     @Override
