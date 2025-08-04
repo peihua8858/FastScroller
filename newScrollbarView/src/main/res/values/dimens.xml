@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="scrollbarview_min_width">100dp</dimen>
+    <dimen name="scrollbarview_min_width">32dp</dimen>
     <dimen name="scrollbarview_min_thumb_length">48dp</dimen>
     <dimen name="scrollbarview_overscroll_min_thumb_length">4dp</dimen>
-    <dimen name="scrollbarview_thumb_width">40dp</dimen>
+    <dimen name="scrollbarview_thumb_width">16dp</dimen>
     <dimen name="searchview_bar_min_width">110dp</dimen>
     <dimen name="tertiary_content_alpha">0.4</dimen>
 

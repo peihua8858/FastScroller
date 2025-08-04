@@ -1,7 +1,7 @@
 package com.peihua.scrollbarview.widget;
 
-public interface IOverScrollProxy {
+public interface IScrollProxy {
     int getScrollY();
 
-    boolean isOverScrolling();
+    boolean isScrolling();
 }

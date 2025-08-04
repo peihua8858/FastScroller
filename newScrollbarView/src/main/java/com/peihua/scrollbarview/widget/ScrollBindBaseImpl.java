@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ScrollBindBaseImpl implements IScrollBind {
 
+
     @Override
-    public void onBindView(AbsListView absListView, ScrollbarView scrollbarView, boolean setOnTouchListener) {
+    public void onBindView(AbsListView absListView, ScrollbarView scrollbarView, boolean z) {
         if (absListView == null || scrollbarView == null) {
             return;
         }
-        scrollbarView.bindScrollableView(absListView, setOnTouchListener);
+        scrollbarView.setScrollableView(absListView, z);
         absListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -26,27 +27,28 @@ public class ScrollBindBaseImpl implements IScrollBind {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                scrollbarView.onScroll();
+                scrollbarView.onScroll(view, 0, 0, 0, 0);
             }
         });
     }
 
     @Override
-    public void onBindView(RecyclerView recyclerView, ScrollbarView scrollbarView, boolean setOnTouchListener) {
+    public void onBindView(RecyclerView recyclerView, ScrollbarView scrollbarView, boolean z) {
         if (recyclerView == null || scrollbarView == null) {
             return;
         }
-        scrollbarView.bindScrollableView(recyclerView, setOnTouchListener);
+        scrollbarView.setScrollableView(recyclerView, z);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                scrollbarView.onScroll();
+                scrollbarView.onScroll(recyclerView, 0, 0, 0, 0);
             }
         });
     }
 
     @Override
-    public void onBindView(ScrollView scrollView, ScrollbarView scrollbarView, boolean setOnTouchListener) {
+    public void onBindView(ScrollView scrollView, ScrollbarView scrollbarView, boolean z) {
+
     }
 
     @Override
@@ -54,14 +56,14 @@ public class ScrollBindBaseImpl implements IScrollBind {
         if (scrollView == null || scrollbarView == null) {
             return;
         }
-        scrollbarView.bindScrollableView(scrollView, z);
-        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> scrollbarView.onScroll());
+        scrollbarView.setScrollableView(scrollView, z);
+        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) scrollbarView::onScroll);
     }
 
     @Override
-    public void onScrollableViewTouchEvent(View view, ScrollbarView scrollbarView, MotionEvent event) {
-        if (view != null && scrollbarView != null && event != null) {
-            scrollbarView.scrollableViewTouchEvent(view, event);
+    public void onScrollableViewTouchEvent(View var1, ScrollbarView var2, MotionEvent var3) {
+        if (var1 != null && var2 != null && var3 != null) {
+            var2.onScrollableViewTouchEvent(var1, var3);
         }
     }
 }

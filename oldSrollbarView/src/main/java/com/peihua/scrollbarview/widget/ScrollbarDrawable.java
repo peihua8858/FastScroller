@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
+import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import com.peihua.scrollbarview.R;
 import com.peihua.scrollbarview.interpolator.CubicBezierInterpolator;
 
@@ -81,7 +84,7 @@ public class ScrollbarDrawable extends Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         int scrollbarColor = this.mScrollbarColor;
         int tint = this.mTint;
         if (tint != 0) {
@@ -91,7 +94,8 @@ public class ScrollbarDrawable extends Drawable {
         this.mPaint.setColor(((scrollbarColor << 8) >>> 8) | ((((scrollbarColor >>> 24) * (alpha + (alpha >> 7))) >> 8) << 24));
         RectF rectF = this.mRectF;
         Rect bounds = getBounds();
-        if (isAutoMirrored() && getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+        int layoutDirection = DrawableCompat.getLayoutDirection(this);
+        if (isAutoMirrored() && layoutDirection == View.LAYOUT_DIRECTION_RTL) {
             float scrollbarEndMargin = bounds.left + this.mScrollbarEndMargin;
             rectF.left = scrollbarEndMargin;
             rectF.right = scrollbarEndMargin + this.mScrollbarWidth;
@@ -112,7 +116,7 @@ public class ScrollbarDrawable extends Drawable {
     }
 
     @Override
-    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws IOException, XmlPullParserException {
+    public void inflate(@NonNull Resources resources, @NonNull XmlPullParser xmlPullParser, @NonNull AttributeSet attributeSet, Resources.Theme theme) throws IOException, XmlPullParserException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         int[] iArr = R.styleable.ScrollbarDrawable;
         TypedArray obtainAttributes = theme == null ? resources.obtainAttributes(attributeSet, iArr) : theme.obtainStyledAttributes(attributeSet, iArr, 0, 0);
